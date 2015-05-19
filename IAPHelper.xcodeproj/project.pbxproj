@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C67704641B0B2AB500B6451C /* IAPHelper.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C67704611B0B2AB500B6451C /* IAPHelper.podspec */; };
+		C67704651B0B2AB500B6451C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C67704621B0B2AB500B6451C /* LICENSE */; };
+		C67704661B0B2AB500B6451C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = C67704631B0B2AB500B6451C /* README.md */; };
 		C6FFD4021B0B182F00B9450F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD4011B0B182F00B9450F /* main.m */; };
 		C6FFD4051B0B182F00B9450F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD4041B0B182F00B9450F /* AppDelegate.m */; };
 		C6FFD4081B0B182F00B9450F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD4071B0B182F00B9450F /* ViewController.m */; };
@@ -14,9 +17,6 @@
 		C6FFD40D1B0B182F00B9450F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6FFD40C1B0B182F00B9450F /* Images.xcassets */; };
 		C6FFD4101B0B182F00B9450F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6FFD40E1B0B182F00B9450F /* LaunchScreen.xib */; };
 		C6FFD41C1B0B182F00B9450F /* IAPHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD41B1B0B182F00B9450F /* IAPHelperTests.m */; };
-		C6FFD4341B0B18A000B9450F /* IAPHelper.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C6FFD4311B0B18A000B9450F /* IAPHelper.podspec */; };
-		C6FFD4351B0B18A000B9450F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C6FFD4321B0B18A000B9450F /* LICENSE */; };
-		C6FFD4361B0B18A000B9450F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD4331B0B18A000B9450F /* README.md */; };
 		C6FFD43E1B0B241A00B9450F /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD4391B0B241A00B9450F /* IAPHelper.m */; };
 		C6FFD43F1B0B241A00B9450F /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD43B1B0B241A00B9450F /* NSString+Base64.m */; };
 		C6FFD4401B0B241A00B9450F /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD43D1B0B241A00B9450F /* SFHFKeychainUtils.m */; };
@@ -33,6 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C67704611B0B2AB500B6451C /* IAPHelper.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IAPHelper.podspec; sourceTree = SOURCE_ROOT; };
+		C67704621B0B2AB500B6451C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		C67704631B0B2AB500B6451C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		C6FFD3FC1B0B182F00B9450F /* IAPHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IAPHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6FFD4001B0B182F00B9450F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6FFD4011B0B182F00B9450F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -46,9 +49,6 @@
 		C6FFD4151B0B182F00B9450F /* IAPHelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IAPHelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6FFD41A1B0B182F00B9450F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6FFD41B1B0B182F00B9450F /* IAPHelperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAPHelperTests.m; sourceTree = "<group>"; };
-		C6FFD4311B0B18A000B9450F /* IAPHelper.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IAPHelper.podspec; sourceTree = "<group>"; };
-		C6FFD4321B0B18A000B9450F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		C6FFD4331B0B18A000B9450F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C6FFD4381B0B241A00B9450F /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
 		C6FFD4391B0B241A00B9450F /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
 		C6FFD43A1B0B241A00B9450F /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
@@ -96,6 +96,9 @@
 		C6FFD3FE1B0B182F00B9450F /* IAPHelper */ = {
 			isa = PBXGroup;
 			children = (
+				C67704611B0B2AB500B6451C /* IAPHelper.podspec */,
+				C67704621B0B2AB500B6451C /* LICENSE */,
+				C67704631B0B2AB500B6451C /* README.md */,
 				C6FFD4371B0B241A00B9450F /* Library */,
 				C6FFD4031B0B182F00B9450F /* AppDelegate.h */,
 				C6FFD4041B0B182F00B9450F /* AppDelegate.m */,
@@ -112,9 +115,6 @@
 		C6FFD3FF1B0B182F00B9450F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C6FFD4311B0B18A000B9450F /* IAPHelper.podspec */,
-				C6FFD4321B0B18A000B9450F /* LICENSE */,
-				C6FFD4331B0B18A000B9450F /* README.md */,
 				C6FFD4001B0B182F00B9450F /* Info.plist */,
 				C6FFD4011B0B182F00B9450F /* main.m */,
 			);
@@ -234,8 +234,8 @@
 				C6FFD40B1B0B182F00B9450F /* Main.storyboard in Resources */,
 				C6FFD4101B0B182F00B9450F /* LaunchScreen.xib in Resources */,
 				C6FFD40D1B0B182F00B9450F /* Images.xcassets in Resources */,
-				C6FFD4341B0B18A000B9450F /* IAPHelper.podspec in Resources */,
-				C6FFD4351B0B18A000B9450F /* LICENSE in Resources */,
+				C67704641B0B2AB500B6451C /* IAPHelper.podspec in Resources */,
+				C67704651B0B2AB500B6451C /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +256,8 @@
 				C6FFD43F1B0B241A00B9450F /* NSString+Base64.m in Sources */,
 				C6FFD4081B0B182F00B9450F /* ViewController.m in Sources */,
 				C6FFD4051B0B182F00B9450F /* AppDelegate.m in Sources */,
+				C67704661B0B2AB500B6451C /* README.md in Sources */,
 				C6FFD4401B0B241A00B9450F /* SFHFKeychainUtils.m in Sources */,
-				C6FFD4361B0B18A000B9450F /* README.md in Sources */,
 				C6FFD43E1B0B241A00B9450F /* IAPHelper.m in Sources */,
 				C6FFD4021B0B182F00B9450F /* main.m in Sources */,
 			);
@@ -456,6 +456,7 @@
 				C6FFD4211B0B182F00B9450F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C6FFD4221B0B182F00B9450F /* Build configuration list for PBXNativeTarget "IAPHelperTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +465,7 @@
 				C6FFD4241B0B182F00B9450F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
