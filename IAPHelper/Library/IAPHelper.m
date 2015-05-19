@@ -315,4 +315,10 @@
     }
 }
 
+- (void)dealloc
+{
+    //http://stackoverflow.com/questions/4150926/in-app-purchase-crashes-on-skpaymentqueue-defaultqueue-addpaymentpayment
+    //https://github.com/saturngod/IAPHelper/issues/9
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+}
 @end
