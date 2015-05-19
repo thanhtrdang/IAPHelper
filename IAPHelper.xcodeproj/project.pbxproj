@@ -14,12 +14,12 @@
 		C6FFD40D1B0B182F00B9450F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6FFD40C1B0B182F00B9450F /* Images.xcassets */; };
 		C6FFD4101B0B182F00B9450F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6FFD40E1B0B182F00B9450F /* LaunchScreen.xib */; };
 		C6FFD41C1B0B182F00B9450F /* IAPHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD41B1B0B182F00B9450F /* IAPHelperTests.m */; };
-		C6FFD42D1B0B189000B9450F /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD4261B0B189000B9450F /* IAPHelper.m */; };
-		C6FFD42F1B0B189000B9450F /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD42A1B0B189000B9450F /* NSString+Base64.m */; };
-		C6FFD4301B0B189000B9450F /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD42C1B0B189000B9450F /* SFHFKeychainUtils.m */; };
 		C6FFD4341B0B18A000B9450F /* IAPHelper.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C6FFD4311B0B18A000B9450F /* IAPHelper.podspec */; };
 		C6FFD4351B0B18A000B9450F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C6FFD4321B0B18A000B9450F /* LICENSE */; };
 		C6FFD4361B0B18A000B9450F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD4331B0B18A000B9450F /* README.md */; };
+		C6FFD43E1B0B241A00B9450F /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD4391B0B241A00B9450F /* IAPHelper.m */; };
+		C6FFD43F1B0B241A00B9450F /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD43B1B0B241A00B9450F /* NSString+Base64.m */; };
+		C6FFD4401B0B241A00B9450F /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFD43D1B0B241A00B9450F /* SFHFKeychainUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,15 +46,15 @@
 		C6FFD4151B0B182F00B9450F /* IAPHelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IAPHelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6FFD41A1B0B182F00B9450F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6FFD41B1B0B182F00B9450F /* IAPHelperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAPHelperTests.m; sourceTree = "<group>"; };
-		C6FFD4251B0B189000B9450F /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
-		C6FFD4261B0B189000B9450F /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
-		C6FFD4291B0B189000B9450F /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
-		C6FFD42A1B0B189000B9450F /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
-		C6FFD42B1B0B189000B9450F /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
-		C6FFD42C1B0B189000B9450F /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		C6FFD4311B0B18A000B9450F /* IAPHelper.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IAPHelper.podspec; sourceTree = "<group>"; };
 		C6FFD4321B0B18A000B9450F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C6FFD4331B0B18A000B9450F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C6FFD4381B0B241A00B9450F /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
+		C6FFD4391B0B241A00B9450F /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
+		C6FFD43A1B0B241A00B9450F /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
+		C6FFD43B1B0B241A00B9450F /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		C6FFD43C1B0B241A00B9450F /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		C6FFD43D1B0B241A00B9450F /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,12 +96,7 @@
 		C6FFD3FE1B0B182F00B9450F /* IAPHelper */ = {
 			isa = PBXGroup;
 			children = (
-				C6FFD4251B0B189000B9450F /* IAPHelper.h */,
-				C6FFD4261B0B189000B9450F /* IAPHelper.m */,
-				C6FFD4291B0B189000B9450F /* NSString+Base64.h */,
-				C6FFD42A1B0B189000B9450F /* NSString+Base64.m */,
-				C6FFD42B1B0B189000B9450F /* SFHFKeychainUtils.h */,
-				C6FFD42C1B0B189000B9450F /* SFHFKeychainUtils.m */,
+				C6FFD4371B0B241A00B9450F /* Library */,
 				C6FFD4031B0B182F00B9450F /* AppDelegate.h */,
 				C6FFD4041B0B182F00B9450F /* AppDelegate.m */,
 				C6FFD4061B0B182F00B9450F /* ViewController.h */,
@@ -141,6 +136,19 @@
 				C6FFD41A1B0B182F00B9450F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C6FFD4371B0B241A00B9450F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				C6FFD4381B0B241A00B9450F /* IAPHelper.h */,
+				C6FFD4391B0B241A00B9450F /* IAPHelper.m */,
+				C6FFD43A1B0B241A00B9450F /* NSString+Base64.h */,
+				C6FFD43B1B0B241A00B9450F /* NSString+Base64.m */,
+				C6FFD43C1B0B241A00B9450F /* SFHFKeychainUtils.h */,
+				C6FFD43D1B0B241A00B9450F /* SFHFKeychainUtils.m */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,12 +253,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6FFD42F1B0B189000B9450F /* NSString+Base64.m in Sources */,
-				C6FFD42D1B0B189000B9450F /* IAPHelper.m in Sources */,
-				C6FFD4301B0B189000B9450F /* SFHFKeychainUtils.m in Sources */,
+				C6FFD43F1B0B241A00B9450F /* NSString+Base64.m in Sources */,
 				C6FFD4081B0B182F00B9450F /* ViewController.m in Sources */,
 				C6FFD4051B0B182F00B9450F /* AppDelegate.m in Sources */,
+				C6FFD4401B0B241A00B9450F /* SFHFKeychainUtils.m in Sources */,
 				C6FFD4361B0B18A000B9450F /* README.md in Sources */,
+				C6FFD43E1B0B241A00B9450F /* IAPHelper.m in Sources */,
 				C6FFD4021B0B182F00B9450F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
