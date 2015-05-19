@@ -56,10 +56,21 @@
     self.purchasedProducts = purchasedProducts;
 }
 
--(BOOL)isPurchasedProductIdentifier:(NSString*)productIdentifier
-{
+-(BOOL)isPurchasedProductIdentifier:(NSString*)productIdentifier {
     id purchasedProduct = [[FXKeychain defaultKeychain] objectForKey:productIdentifier];
     return purchasedProduct != nil && [purchasedProduct boolValue] == YES;
+}
+
+- (SKProduct *)productForIdentifier:(NSString*)productIdentifier {
+    SKProduct *product = nil;
+    for (SKProduct *obj in self.products) {
+        if ([obj.productIdentifier isEqualToString:productIdentifier]) {
+            product = obj;
+            break;
+        }
+    }
+    
+    return product;
 }
 
 - (void)requestProductsWithCompletion:(IAPProductsResponseBlock)completion {
@@ -159,28 +170,20 @@
 }
 
 - (void)buyProductIdentifier:(NSString *)productIdentifier onCompletion:(IAPBuyProductCompleteResponseBlock)completion {
-    SKProduct *product = nil;
-    for (SKProduct *obj in self.products) {
-        if ([obj.productIdentifier isEqualToString:productIdentifier]) {
-            product = obj;
-            break;
-        }
-    }
-    
-    [self buyProduct:product onCompletion:completion];
-}
-
-- (void)buyProduct:(SKProduct *)product onCompletion:(IAPBuyProductCompleteResponseBlock)completion {
-    if (product) {
-        [self _buyProduct:product onCompletion:completion];
+    SKProduct *product1 = [self productForIdentifier:productIdentifier];
+    if (product1) {
+        [self buyProduct:product1 onCompletion:completion];
     } else {
         [self requestProductsWithCompletion:^(SKProductsRequest *request, SKProductsResponse *response) {
-            [self _buyProduct:product onCompletion:completion];
+            SKProduct *product2 = [self productForIdentifier:productIdentifier];
+            if (product2) {
+                [self buyProduct:product2 onCompletion:completion];
+            }
         }];
     }
 }
 
-- (void)_buyProduct:(SKProduct *)product onCompletion:(IAPBuyProductCompleteResponseBlock)completion {
+- (void)buyProduct:(SKProduct *)product onCompletion:(IAPBuyProductCompleteResponseBlock)completion {
     self.buyProductCompleteBlock = completion;
     
     self.restoreCompletedBlock = nil;

@@ -29,6 +29,7 @@ typedef void (^IAPRestoreProductsCompleteResponseBlock) (SKPaymentQueue* payment
 - (void)iapWithProductIdentifiers:(NSSet *)productIdentifiers;
 
 - (BOOL)isPurchasedProductIdentifier:(NSString*)productIdentifier;
+- (SKProduct *)productForIdentifier:(NSString*)productIdentifier;
 
 - (void)requestProductsWithCompletion:(IAPProductsResponseBlock)completion;
 
