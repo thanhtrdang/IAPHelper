@@ -17,80 +17,69 @@
 
 @interface IAPHelper()
 @property (nonatomic,copy) IAPProductsResponseBlock requestProductsBlock;
-@property (nonatomic,copy) IAPbuyProductCompleteResponseBlock buyProductCompleteBlock;
-@property (nonatomic,copy) resoreProductsCompleteResponseBlock restoreCompletedBlock;
-@property (nonatomic,copy) checkReceiptCompleteResponseBlock checkReceiptCompleteBlock;
+@property (nonatomic,copy) IAPBuyProductCompleteResponseBlock buyProductCompleteBlock;
+@property (nonatomic,copy) IAPRestoreProductsCompleteResponseBlock restoreCompletedBlock;
+@property (nonatomic,copy) IAPVerifyReceiptCompleteResponseBlock verifyReceiptCompleteBlock;
 
 @property (nonatomic,strong) NSMutableData* receiptRequestData;
 @end
 
 @implementation IAPHelper
 
-- (id)initWithProductIdentifiers:(NSSet *)productIdentifiers {
-    if ((self = [super init])) {
-        
-        // Store product identifiers
-        _productIdentifiers = productIdentifiers;
-        
-        // Check for previously purchased products
-        NSMutableSet * purchasedProducts = [NSMutableSet set];
-        for (NSString * productIdentifier in _productIdentifiers) {
-            
-            BOOL productPurchased = NO;
-            
-            NSString* password = [SFHFKeychainUtils getPasswordForUsername:productIdentifier andServiceName:@"IAPHelper" error:nil];
-            if([password isEqualToString:@"YES"])
-            {
-                productPurchased = YES;
-            }
-            
-            if (productPurchased) {
-                [purchasedProducts addObject:productIdentifier];
-                
-            }
-        }
-        
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-        
-        self.purchasedProducts = purchasedProducts;
-                        
-    }
-    return self;
++ (instancetype)sharedInstance
+{
+    static dispatch_once_t once;
+    static id sharedInstance;
+    
+    dispatch_once(&once, ^{
+        sharedInstance = [self new];
+    });
+    
+    return sharedInstance;
 }
 
--(BOOL)isPurchasedProductsIdentifier:(NSString*)productID
-{
-
-    BOOL productPurchased = NO;
+- (void)iapWithProductIdentifiers:(NSSet *)productIdentifiers {
+    // Store product identifiers
+    _productIdentifiers = productIdentifiers;
     
-    NSString* password = [SFHFKeychainUtils getPasswordForUsername:productID andServiceName:@"IAPHelper" error:nil];
-    if([password isEqualToString:@"YES"])
-    {
-        productPurchased = YES;
+    // Check for previously purchased products
+    NSMutableSet * purchasedProducts = [NSMutableSet set];
+    for (NSString * productIdentifier in _productIdentifiers) {
+        NSString* password = [SFHFKeychainUtils getPasswordForUsername:productIdentifier andServiceName:@"IAPHelper" error:nil];
+        BOOL productPurchased = [password isEqualToString:@"YES"];
+        
+        if (productPurchased) {
+            [purchasedProducts addObject:productIdentifier];
+            
+        }
     }
+    
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    
+    self.purchasedProducts = purchasedProducts;
+}
 
-    return productPurchased;
+-(BOOL)isPurchasedProductIdentifier:(NSString*)productIdentifier
+{
+    NSString* password = [SFHFKeychainUtils getPasswordForUsername:productIdentifier andServiceName:@"IAPHelper" error:nil];
+    return [password isEqualToString:@"YES"];
 }
 
 - (void)requestProductsWithCompletion:(IAPProductsResponseBlock)completion {
-    
     self.request = [[SKProductsRequest alloc] initWithProductIdentifiers:_productIdentifiers];
     _request.delegate = self;
     self.requestProductsBlock = completion;
     
     [_request start];
-    
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
-    
     self.products = response.products;
     self.request = nil;
 
     if(_requestProductsBlock) {
-        _requestProductsBlock (request,response);
+        _requestProductsBlock (request, response);
     }
-
 }
 
 - (void)recordTransaction:(SKPaymentTransaction *)transaction {    
@@ -98,34 +87,22 @@
 }
 
 - (void)provideContent:(NSString *)productIdentifier {
-    
     [SFHFKeychainUtils storeUsername:productIdentifier andPassword:@"YES" forServiceName:@"IAPHelper" updateExisting:YES error:nil];
-    
     [_purchasedProducts addObject:productIdentifier];
-    
-
 }
 
 - (void)clearSavedPurchasedProducts {
-    
     for (NSString * productIdentifier in _productIdentifiers) {
         [self clearSavedPurchasedProductByID:productIdentifier];
     }
-    
 }
 - (void)clearSavedPurchasedProductByID:(NSString*)productIdentifier {
-    
     [SFHFKeychainUtils deleteItemForUsername:productIdentifier andServiceName:@"IAPHelper" error:nil];
     [_purchasedProducts removeObject:productIdentifier];
-    
 }
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction {
-    
-  
-    
     [self recordTransaction: transaction];
-    
     
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
     
@@ -133,12 +110,9 @@
     {
         _buyProductCompleteBlock(transaction);
     }
-    
 }
 
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction {
-    
-    
     [self recordTransaction: transaction];
     
     if (transaction.originalTransaction)
@@ -148,26 +122,23 @@
 
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 
-    if(_buyProductCompleteBlock!=nil)
+    if(_buyProductCompleteBlock)
     {
         _buyProductCompleteBlock(transaction);
     }
-    
 }
 
 - (void)failedTransaction:(SKPaymentTransaction *)transaction {
-    
     if (transaction.error.code != SKErrorPaymentCancelled)
     {
         NSLog(@"Transaction error: %@ %ld", transaction.error.localizedDescription,(long)transaction.error.code);
     }
-
     
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    
     if(_buyProductCompleteBlock) {
         _buyProductCompleteBlock(transaction);
     }
-    
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
@@ -190,29 +161,45 @@
     }
 }
 
-- (void)buyProduct:(SKProduct *)productIdentifier onCompletion:(IAPbuyProductCompleteResponseBlock)completion {
+- (void)buyProductIdentifier:(NSString *)productIdentifier onCompletion:(IAPBuyProductCompleteResponseBlock)completion {
+    SKProduct *product = nil;
+    for (SKProduct *obj in self.products) {
+        if ([obj.productIdentifier isEqualToString:productIdentifier]) {
+            product = obj;
+            break;
+        }
+    }
     
+    [self buyProduct:product onCompletion:completion];
+}
+
+- (void)buyProduct:(SKProduct *)product onCompletion:(IAPBuyProductCompleteResponseBlock)completion {
+    if (product) {
+        [self _buyProduct:product onCompletion:completion];
+    } else {
+        [self requestProductsWithCompletion:^(SKProductsRequest *request, SKProductsResponse *response) {
+            [self _buyProduct:product onCompletion:completion];
+        }];
+    }
+}
+
+- (void)_buyProduct:(SKProduct *)product onCompletion:(IAPBuyProductCompleteResponseBlock)completion {
     self.buyProductCompleteBlock = completion;
     
     self.restoreCompletedBlock = nil;
-    SKPayment *payment = [SKPayment paymentWithProduct:productIdentifier];
+    SKPayment *payment = [SKPayment paymentWithProduct:product];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
-
 }
 
--(void)restoreProductsWithCompletion:(resoreProductsCompleteResponseBlock)completion {
-
+-(void)restoreProductsWithCompletion:(IAPRestoreProductsCompleteResponseBlock)completion {
     //clear it
     self.buyProductCompleteBlock = nil;
     
     self.restoreCompletedBlock = completion;
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-    
-    
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
-    
     NSLog(@"Transaction error: %@ %ld", error.localizedDescription,(long)error.code);
     if(_restoreCompletedBlock) {
         _restoreCompletedBlock(queue,error);
@@ -220,7 +207,6 @@
 }
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
-    
     for (SKPaymentTransaction *transaction in queue.transactions)
     {
         switch (transaction.transactionState)
@@ -228,7 +214,7 @@
             case SKPaymentTransactionStateRestored:
             {
                 [self recordTransaction: transaction];
-	        if (transaction.originalTransaction)
+                if (transaction.originalTransaction)
                     [self provideContent: transaction.originalTransaction.payment.productIdentifier];
                 else
                     [self provideContent: transaction.payment.productIdentifier];
@@ -241,17 +227,15 @@
     if(_restoreCompletedBlock) {
         _restoreCompletedBlock(queue,nil);
     }
-
 }
 
-- (void)checkReceipt:(NSData*)receiptData onCompletion:(checkReceiptCompleteResponseBlock)completion
+- (void)verifyReceipt:(NSData*)receiptData onCompletion:(IAPVerifyReceiptCompleteResponseBlock)completion
 {
-    [self checkReceipt:receiptData AndSharedSecret:nil onCompletion:completion];
+    [self verifyReceipt:receiptData secretKey:nil onCompletion:completion];
 }
-- (void)checkReceipt:(NSData*)receiptData AndSharedSecret:(NSString*)secretKey onCompletion:(checkReceiptCompleteResponseBlock)completion
+- (void)verifyReceipt:(NSData*)receiptData secretKey:(NSString*)secretKey onCompletion:(IAPVerifyReceiptCompleteResponseBlock)completion
 {
-    
-    self.checkReceiptCompleteBlock = completion;
+    self.verifyReceiptCompleteBlock = completion;
 
     NSError *jsonError = nil;
     NSString *receiptBase64 = [NSString base64StringFromData:receiptData length:[receiptData length]];
@@ -301,8 +285,8 @@
         NSMutableDictionary* errorDetail = [[NSMutableDictionary alloc] init];
         [errorDetail setValue:@"Can't create connection" forKey:NSLocalizedDescriptionKey];
         error = [NSError errorWithDomain:@"IAPHelperError" code:100 userInfo:errorDetail];
-        if(_checkReceiptCompleteBlock) {
-            _checkReceiptCompleteBlock(nil,error);
+        if(_verifyReceiptCompleteBlock) {
+            _verifyReceiptCompleteBlock(nil,error);
         }
     }
 }
@@ -310,10 +294,9 @@
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"Cannot transmit receipt data. %@",[error localizedDescription]);
     
-    if(_checkReceiptCompleteBlock) {
-        _checkReceiptCompleteBlock(nil,error);
+    if(_verifyReceiptCompleteBlock) {
+        _verifyReceiptCompleteBlock(nil,error);
     }
-    
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -327,8 +310,8 @@
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSString *response = [[NSString alloc] initWithData:self.receiptRequestData encoding:NSUTF8StringEncoding];
     
-    if(_checkReceiptCompleteBlock) {
-        _checkReceiptCompleteBlock(response,nil);
+    if(_verifyReceiptCompleteBlock) {
+        _verifyReceiptCompleteBlock(response,nil);
     }
 }
 
