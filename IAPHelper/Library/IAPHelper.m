@@ -6,9 +6,10 @@
 //  Copyright 2011 Ray Wenderlich. All rights reserved.
 //
 
+#import <FXKeychain/FXKeychain.h>
+
 #import "IAPHelper.h"
 #import "NSString+Base64.h"
-#import "SFHFKeychainUtils.h"
 
 #if ! __has_feature(objc_arc)
 #error You need to either convert your project to ARC or add the -fobjc-arc compiler flag to IAPHelper.m.
@@ -45,12 +46,8 @@
     // Check for previously purchased products
     NSMutableSet * purchasedProducts = [NSMutableSet set];
     for (NSString * productIdentifier in _productIdentifiers) {
-        NSString* password = [SFHFKeychainUtils getPasswordForUsername:productIdentifier andServiceName:@"IAPHelper" error:nil];
-        BOOL productPurchased = [password isEqualToString:@"YES"];
-        
-        if (productPurchased) {
+        if ([self isPurchasedProductIdentifier:productIdentifier]) {
             [purchasedProducts addObject:productIdentifier];
-            
         }
     }
     
@@ -61,8 +58,8 @@
 
 -(BOOL)isPurchasedProductIdentifier:(NSString*)productIdentifier
 {
-    NSString* password = [SFHFKeychainUtils getPasswordForUsername:productIdentifier andServiceName:@"IAPHelper" error:nil];
-    return [password isEqualToString:@"YES"];
+    id purchasedProduct = [[FXKeychain defaultKeychain] objectForKey:productIdentifier];
+    return purchasedProduct != nil && [purchasedProduct boolValue] == YES;
 }
 
 - (void)requestProductsWithCompletion:(IAPProductsResponseBlock)completion {
@@ -87,7 +84,7 @@
 }
 
 - (void)provideContent:(NSString *)productIdentifier {
-    [SFHFKeychainUtils storeUsername:productIdentifier andPassword:@"YES" forServiceName:@"IAPHelper" updateExisting:YES error:nil];
+    [[FXKeychain defaultKeychain] setObject:@YES forKey:productIdentifier];
     [_purchasedProducts addObject:productIdentifier];
 }
 
@@ -97,7 +94,7 @@
     }
 }
 - (void)clearSavedPurchasedProductByID:(NSString*)productIdentifier {
-    [SFHFKeychainUtils deleteItemForUsername:productIdentifier andServiceName:@"IAPHelper" error:nil];
+    [[FXKeychain defaultKeychain] removeObjectForKey:productIdentifier];
     [_purchasedProducts removeObject:productIdentifier];
 }
 
@@ -286,7 +283,7 @@
         [errorDetail setValue:@"Can't create connection" forKey:NSLocalizedDescriptionKey];
         error = [NSError errorWithDomain:@"IAPHelperError" code:100 userInfo:errorDetail];
         if(_verifyReceiptCompleteBlock) {
-            _verifyReceiptCompleteBlock(nil,error);
+            _verifyReceiptCompleteBlock(nil, error);
         }
     }
 }
