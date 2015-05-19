@@ -12,5 +12,6 @@ Pod::Spec.new do |s|
   s.source_files = "IAPHelper/Library/*.{h,m}"
   s.public_header_files = "IAPHelper/Library/*.h"
   s.framework  = 'StoreKit'
-  
+  s.dependency 'FXKeychain'
+
 end
