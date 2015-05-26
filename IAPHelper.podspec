@@ -7,11 +7,11 @@ Pod::Spec.new do |s|
   s.license  = "MIT"
   s.author       = { "saturngod" => "saturngod@gmail.com" }
   s.requires_arc = true
-  s.platform     = :ios, '6.0'
+  s.platform     = :ios, '7.0'
   s.source       = { :git => "https://github.com/thanhtrdang/IAPHelper.git", :branch => "master" }
   s.source_files = "IAPHelper/Library/*.{h,m}"
   s.public_header_files = "IAPHelper/Library/*.h"
-  s.framework  = 'StoreKit'
-  s.dependency 'FXKeychain'
+  s.framework    = "StoreKit"
+  s.dependency     "FXKeychain"
 
 end
